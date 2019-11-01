@@ -22,14 +22,18 @@ RUN \
   python-dev \
   python-pip \
   python-yaml \
-  redis-server \
+  python-setuptools \
   && apt-get clean
-
-RUN python -v
-RUN pip -v
 
 RUN pip install awscli --upgrade
 
 RUN npm install -g yarn --update
+
+RUN curl --insecure -OL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip && unzip sonar-scanner-cli-4.2.0.1873-linux.zip
+
+RUN ls -la /sonar-scanner-4.2.0.1873-linux/bin
+
+RUN echo "#!/bin/bash\n/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner" > /usr/bin/sonar-scanner && \
+    chmod +x /usr/bin/sonar-scanner
 
 CMD ["aws", "--version"]
