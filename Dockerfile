@@ -31,9 +31,9 @@ RUN npm install -g yarn --update
 
 RUN curl --insecure -OL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip && unzip sonar-scanner-cli-4.2.0.1873-linux.zip
 
-RUN ls -la /sonar-scanner-4.2.0.1873-linux/bin
-
 RUN echo "#!/bin/bash\n/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner" > /usr/bin/sonar-scanner && \
     chmod +x /usr/bin/sonar-scanner
+
+ENV MONGOMS_DOWNLOAD_MIRROR http://downloads.mongodb.org
 
 CMD ["aws", "--version"]
