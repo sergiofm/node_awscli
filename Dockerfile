@@ -32,6 +32,10 @@ RUN curl --insecure -OL https://binaries.sonarsource.com/Distribution/sonar-scan
 RUN echo "#!/bin/bash\n/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner" > /usr/bin/sonar-scanner && \
     chmod +x /usr/bin/sonar-scanner
 
-ENV MONGOMS_DOWNLOAD_MIRROR http://downloads.mongodb.org
+RUN apt-get install gnupg
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-3.6.asc | apt-key add -
+RUN echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/3.6 main" | tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+RUN apt-get update
+RUN apt-get install -y mongodb-org
 
 CMD ["aws", "--version"]
