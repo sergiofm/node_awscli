@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:12
 
 RUN \
   apt-get update \
@@ -26,8 +26,6 @@ RUN \
   && apt-get clean
 
 RUN pip install awscli --upgrade
-
-RUN npm install -g yarn --update
 
 RUN curl --insecure -OL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip && unzip sonar-scanner-cli-4.2.0.1873-linux.zip
 
