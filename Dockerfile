@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:12-stretch
 
 RUN \
   apt-get update \
